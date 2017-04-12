@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class FMHelloController {
 
 
-    @RequestMapping("/")
+    @RequestMapping("/index")
     public String index(){
         System.out.println("INDEX");
         return "index";

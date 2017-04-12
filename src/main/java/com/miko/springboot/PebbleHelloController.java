@@ -21,6 +21,7 @@ package com.miko.springboot;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @author Miro Kopecky (@miragemiko)
@@ -30,11 +31,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PebbleHelloController {
 
-    @GetMapping(value = "/pebble")
+    @GetMapping(value = "/")
     public String something(Model model){
         System.out.println("Pebble");
         model.addAttribute("pebble", "The Pebble");
-        model.addAttribute("name", "Jenny");
-        return "home";
+        model.addAttribute("header", "h");
+        model.addAttribute("footer", "f");
+        return "pebble";
+    }
+
+    @GetMapping(value = "/home")
+    public ModelAndView goHome(){
+        ModelAndView mav = new ModelAndView();
+        System.out.println("Pebble home");
+        mav.setViewName("home");
+        mav.addObject("name", "The Pebble");
+        mav.addObject("header", "header");
+        mav.addObject("footer", "footer");
+        return mav;
     }
 }

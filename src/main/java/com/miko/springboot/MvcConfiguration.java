@@ -33,7 +33,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
-import org.springframework.web.servlet.view.velocity.VelocityViewResolver;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
@@ -62,21 +61,14 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
         return resolver;
     }
 
-    @Bean(name = "velocityViewResolver")
-    public ViewResolver getVelocityViewResolver() {
-        VelocityViewResolver resolver = new VelocityViewResolver();
-        resolver.setSuffix(".vm");
-        resolver.setCache(true);
-        return resolver;
-    }
-
 
     @Bean(name="pebbleViewResolver")
     public ViewResolver getPebbleViewResolver(){
         PebbleViewResolver resolver = new PebbleViewResolver();
-        resolver.setPrefix("/pebble/");
+        resolver.setPrefix("/WEB-INF/templates/");
         resolver.setSuffix(".html");
         resolver.setPebbleEngine(pebbleEngine());
+        resolver.setCache(false);
         return resolver;
     }
 
@@ -92,7 +84,6 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
     public ViewResolver contentNegotiatingViewResolver( ContentNegotiationManager manager) {
         List<ViewResolver> resolvers =
                 Arrays.asList(
-                        getVelocityViewResolver(),
                         getFreeMakerViewResolver(),
                         getPebbleViewResolver()
 //                        getThymeleafViewResolver()
