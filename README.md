@@ -1,2 +1,2 @@
-# spring-boot-freemaker-demo
+# spring-boot-pebbles-demo
 Spring-Boot templating demo
